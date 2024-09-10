@@ -1,0 +1,14 @@
+# user PID (check with `id $USER`)
+PUID=1000
+# user GID (check with `id $USER`)
+PGID=1000
+# Timezone
+TZ=Asia/Jakarta
+# Password for login to codeserver
+PASSWORD=<password>
+# Password for sudo
+SUDO_PASSWORD=<sudo password>
+# Domain for codeserver 
+PROXY_DOMAIN=local.code-server
+# Default folder that open when codeserver first open.
+DEFAULT_WORKSPACE=/home/workspace
