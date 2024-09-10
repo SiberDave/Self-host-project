@@ -19,6 +19,18 @@ services:
     expose:
       - "80"
     image: vaultwarden/server:1.32.0-alpine
+  portainer-ce:
+    expose:
+      - "9443"
+    container_name: portainer
+    command: --sslcert /certs/local.portainer-crt.pem --sslkey /certs/local.portainer-key.pem
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${PWD}/data/portainer:/data
+      - ${PWD}/data/nginx/certs/local.portainer-crt.pem:/certs/local.portainer-crt.pem
+      - ${PWD}/data/nginx/certs/local.portainer-key.pem:/certs/local.portainer-key.pem
+    image: portainer/portainer-ce:2.21.1-alpine
   nginx-app:
     container_name: nginx
     restart: unless-stopped

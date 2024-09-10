@@ -24,5 +24,6 @@ Run docker-composer.yml to run all of application
 ## Application List
 
 - Nginx
-- code-server
-- vaultwarden
+- Code-server
+- Vaultwarden
+- Portainer
