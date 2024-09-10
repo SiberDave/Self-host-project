@@ -31,16 +31,48 @@ services:
       - ${PWD}/data/nginx/certs/local.portainer-crt.pem:/certs/local.portainer-crt.pem
       - ${PWD}/data/nginx/certs/local.portainer-key.pem:/certs/local.portainer-key.pem
     image: portainer/portainer-ce:2.21.1-alpine
+  postgres:
+    container_name: postgre-db
+    restart: unless-stopped
+    volumes:
+      - postgre_data:/var/lib/postgresql/data
+    ports:
+      - 15432:5432
+    expose:
+      - "5432"
+    environment:
+      - POSTGRES_PASSWORD=qwerty
+    image: postgres:16.4
+  nextcloud:
+    container_name: nextcloud
+    restart: unless-stopped
+    expose:
+      - "9000"
+    volumes:
+      - nextcloud_data:/var/www/html
+    environment:
+      - POSTGRES_HOST=postgres
+    env_file:
+      - ${PWD}/.env-nextcloud
+    depends_on:
+      - postgres
+    image: nextcloud:28.0.9-fpm
   nginx-app:
     container_name: nginx
     restart: unless-stopped
     volumes: 
       - ${PWD}/data/nginx/certs:/etc/nginx/certs
       - ${PWD}/nginx.conf:/etc/nginx/nginx.conf
+      # should mount the nextcloud data since fastcgi.
+      - nextcloud_data:/var/www/html
     ports:
       - 80:80
       - 443:443
     depends_on:
       - code-server
       - vaultwarden
+      - nextcloud
     image: nginx:1.27.1
+volumes:
+  postgre_data:
+  nextcloud_data:
