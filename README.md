@@ -27,3 +27,4 @@ Run docker-composer.yml to run all of application
 - Code-server
 - Vaultwarden
 - Portainer
+- Nextcloud (Unstable)
