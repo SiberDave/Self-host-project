@@ -28,3 +28,9 @@ Run docker-composer.yml to run all of application
 - Vaultwarden
 - Portainer
 - Nextcloud (Unstable)
+- Postgresql
+
+## Monitoring Stack
+
+- Prometheus
+- Nginx-Prometheus-Exporter
