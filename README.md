@@ -38,5 +38,5 @@ Run docker-composer.yml to run all of application
 
 ## Application Architecture
 
-![App Screenshot](https://drive.usercontent.google.com/download?id=1X_nIEuOLADGWBioKq6QN1_1eUdOC7B1U)
+![App Screenshot](https://drive.usercontent.google.com/download?id=1QPpnZSrkKzb37sdTgL6UU9y_Q5MlpGLJ)
 
