@@ -29,6 +29,7 @@ Run docker-composer.yml to run all of application
 - Portainer
 - Nextcloud (Unstable)
 - Postgresql
+- Webtop (Web Desktop)
 
 ## Monitoring Stack
 
