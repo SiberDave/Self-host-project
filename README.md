@@ -37,6 +37,5 @@ Run docker-composer.yml to run all of application
 - Nginx-Prometheus-Exporter
 
 ## Application Architecture
-
-![App Screenshot](https://drive.usercontent.google.com/download?id=1QPpnZSrkKzb37sdTgL6UU9y_Q5MlpGLJ)
+![App Screenshot](https://drive.usercontent.google.com/download?id=1jNgom64DRagEPo2R0ya47r8huhjB72YB)
 
