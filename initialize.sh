@@ -11,6 +11,7 @@ cp codeserver/env-codeserver-template .env-codeserver
 cp nextcloud/env-nextcloud-template .env-nextcloud
 cp vaultwarden/env-vaultwarden-template .env-vaultwarden
 cp postgresql/env-postgre-template .env-postgre
+cp mariadb/env-maria-template .env-maria
 
 nginx/self-sign-creator.sh local.vaultwarden
 nginx/self-sign-creator.sh local.code-server

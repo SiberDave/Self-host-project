@@ -20,6 +20,7 @@ Run docker-composer.yml to run all of application
   docker-compose -f docker-compose.yml up -d
 ```
 
+Run the command inside of file postgreqsql/Initialize.sql to install database that needed by application.
     
 ## Application List
 
@@ -29,12 +30,14 @@ Run docker-composer.yml to run all of application
 - Portainer
 - Nextcloud (Unstable)
 - Postgresql
+- Mariadb
 - Webtop (Web Desktop)
 
 ## Monitoring Stack
 
 - Prometheus
 - Nginx-Prometheus-Exporter
+- Node Exporter
 
 ## Application Architecture
 ![App Screenshot](https://drive.usercontent.google.com/download?id=1jNgom64DRagEPo2R0ya47r8huhjB72YB)

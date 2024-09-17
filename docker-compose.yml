@@ -45,6 +45,18 @@ services:
     env_file:
       - ${PWD}/.env-vaultwarden
     image: postgres:16.4
+  maria:
+    container_name: maria-db
+    restart: unless-stopped
+    volumes:
+      - maria_data:/var/lib/mysql:Z
+    env_file:
+      - ${PWD}/.env-maria
+    ports:
+      - 13306:3306
+    expose:
+      - "3306"
+    image: mariadb:11.6.1-rc
   nextcloud:
     container_name: nextcloud
     restart: unless-stopped
@@ -86,6 +98,18 @@ services:
     command: --nginx.scrape-uri=http://nginx-app:8080/stub_status
     expose:
       - "9113"
+  homelab-node-exporter:
+    container_name: node-exporter
+    image: prom/node-exporter:v1.8.2
+    command:
+      - '--path.rootfs=/host'
+    network_mode: host
+    expose:
+      - "9100"
+    pid: host
+    restart: unless-stopped
+    volumes:
+      - '/:/host:ro,rslave'
   prometheus:
     container_name: prometheus
     restart: unless-stopped
@@ -93,6 +117,7 @@ services:
       - "9090"
     volumes:
       - ${PWD}/data/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
     image: prom/prometheus:v2.54.1
   nginx-app:
     container_name: nginx
@@ -111,8 +136,12 @@ services:
       - code-server
       - vaultwarden
       - nextcloud
+      - portainer-ce
+      - webtop
     image: nginx:1.27.1
 volumes:
   postgre_data:
   nextcloud_data:
   webtop_config:
+  prometheus_data:
+  maria_data:
