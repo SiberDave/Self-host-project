@@ -71,26 +71,44 @@ services:
     depends_on:
       - postgres
     image: nextcloud:28.0.9-fpm
-  webtop:
-    container_name: webtop
-    restart: unless-stopped
-    image: lscr.io/linuxserver/webtop:amd64-ubuntu-kde
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Jakarta
-      - SUBFOLDER=/
-      - TITLE=local.Webtop
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - webtop_config:/config
-    expose:
-      - "3000"
-    devices: 
-      - /dev/dri:/dev/dri
-    shm_size: "1gb"
-    security_opt:
-      - seccomp:unconfined
+  # webtop:
+  #   container_name: webtop
+  #   restart: unless-stopped
+  #   image: lscr.io/linuxserver/webtop:amd64-ubuntu-kde
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Asia/Jakarta
+  #     - SUBFOLDER=/
+  #     - TITLE=local.Webtop
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - webtop_config:/config
+  #   expose:
+  #     - "3000"
+  #   devices: 
+  #     - /dev/dri:/dev/dri
+  #   shm_size: "1gb"
+  #   security_opt:
+  #     - seccomp:unconfined
+  # gitlab:
+  #   image: gitlab/gitlab-ce:17.2.7-ce.0
+  #   container_name: gitlab
+  #   restart: unless-stopped
+  #   hostname: 'local.gitlab'
+  #   environment:
+  #     GITLAB_OMNIBUS_CONFIG: |
+  #       external_url 'http://local.gitlab'
+  #       gitlab_rails['gitlab_shell_ssh_port'] = 2424
+  #   expose:
+  #     - "80"
+  #   ports:
+  #     - "2424:22"
+  #   shm_size: '256m'
+  #   volumes:
+  #     - gitlab_config:/etc/gitlab
+  #     - gitlab_logs:/var/log/gitlab
+  #     - gitlab_data:/var/opt/gitlab
   nginx-prometheus-exporter:
     container_name: nginx-exporter
     image: nginx/nginx-prometheus-exporter:1.3.0
@@ -137,11 +155,14 @@ services:
       - vaultwarden
       - nextcloud
       - portainer-ce
-      - webtop
+      # - webtop
     image: nginx:1.27.1
 volumes:
   postgre_data:
   nextcloud_data:
-  webtop_config:
+  # webtop_config:
   prometheus_data:
   maria_data:
+  # gitlab_config:
+  # gitlab_logs:
+  # gitlab_data:

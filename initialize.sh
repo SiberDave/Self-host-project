@@ -7,6 +7,9 @@ mkdir -p data/codeserver/config
 mkdir -p data/portainer
 mkdir -p data/prometheus
 
+cp prometheus/prometheus.yml data/prometheus/prometheus.yml
+cp nginx/nginx.conf data/nginx/nginx.conf
+
 cp codeserver/env-codeserver-template .env-codeserver
 cp nextcloud/env-nextcloud-template .env-nextcloud
 cp vaultwarden/env-vaultwarden-template .env-vaultwarden
@@ -18,4 +21,6 @@ nginx/self-sign-creator.sh local.code-server
 nginx/self-sign-creator.sh local.portainer
 nginx/self-sign-creator.sh local.nextcloud
 nginx/self-sign-creator.sh local.prometheus
-nginx/self-sign-creator.sh local.webtop
+# nginx/self-sign-creator.sh local.gitlab
+# nginx/self-sign-creator.sh local.webtop
+

@@ -28,10 +28,11 @@ Run the command inside of file postgreqsql/Initialize.sql to install database th
 - Code-server
 - Vaultwarden
 - Portainer
-- Nextcloud (Unstable)
+- Nextcloud 
 - Postgresql
 - Mariadb
-- Webtop (Web Desktop)
+- Webtop (Web Desktop) (Unused)
+- Gitlab (Unused)
 
 ## Monitoring Stack
 
