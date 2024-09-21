@@ -33,6 +33,7 @@ Run the command inside of file postgreqsql/Initialize.sql to install database th
 - Mariadb
 - Webtop (Web Desktop) (Unused)
 - Gitlab (Unused)
+- Gitea
 
 ## Monitoring Stack
 

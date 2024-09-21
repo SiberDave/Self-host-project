@@ -15,12 +15,14 @@ cp nextcloud/env-nextcloud-template .env-nextcloud
 cp vaultwarden/env-vaultwarden-template .env-vaultwarden
 cp postgresql/env-postgre-template .env-postgre
 cp mariadb/env-maria-template .env-maria
+cp gitea/env-gitea-template .env-gitea
 
 nginx/self-sign-creator.sh local.vaultwarden
 nginx/self-sign-creator.sh local.code-server
 nginx/self-sign-creator.sh local.portainer
 nginx/self-sign-creator.sh local.nextcloud
 nginx/self-sign-creator.sh local.prometheus
+nginx/self-sign-creator.sh local.gitea
 # nginx/self-sign-creator.sh local.gitlab
 # nginx/self-sign-creator.sh local.webtop
 

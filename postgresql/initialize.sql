@@ -13,3 +13,10 @@ CREATE USER nextclouduser WITH ENCRYPTED PASSWORD '{password}';
 GRANT ALL PRIVILEGES ON DATABASE nextcloud TO nextclouduser; 
 -- Use postgre user or superadmin user
 GRANT ALL ON SCHEMA public TO nextclouduser;
+
+-- Create Gitea Database
+
+CREATE DATABASE gitea;
+CREATE USER giteauser WITH ENCRYPTED PASSWORD '{password}';
+GRANT ALL PRIVILEGES ON DATABASE gitea TO giteauser;
+GRANT ALL ON SCHEMA public TO giteauser;
