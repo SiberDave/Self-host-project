@@ -1,7 +1,7 @@
 
 # Self Host Project
 
-Project for self host most application that i need on server using docker-compose and nginx as reverse proxy.
+Project for self host most application that i need on server using docker-compose and nginx as reverse proxy. It also are using tailscale as the connector between the server and the client since the domain are local domain.
 
 
 ## Installation
@@ -34,6 +34,7 @@ Run the command inside of file postgreqsql/Initialize.sql to install database th
 - Webtop (Web Desktop) (Unused)
 - Gitlab (Unused)
 - Gitea
+- Dnsmasq (Tailscale dns for local domain on phone)
 
 ## Monitoring Stack
 

@@ -10,6 +10,7 @@ mkdir -p data/dnsmasq
 
 cp prometheus/prometheus.yml data/prometheus/prometheus.yml
 cp nginx/nginx.conf data/nginx/nginx.conf
+# cp nginx/fastcgi.conf data/nginx/fastcgi.conf
 cp dnsmasq/dnsmasq.conf data/dnsmasq/dnsmasq.conf
 
 cp codeserver/env-codeserver-template .env-codeserver
@@ -27,6 +28,7 @@ nginx/self-sign-creator.sh local.nextcloud
 nginx/self-sign-creator.sh local.prometheus
 nginx/self-sign-creator.sh local.gitea
 nginx/self-sign-creator.sh local.dnsmasq
+# nginx/self-sign-creator.sh local.miniclass
 # nginx/self-sign-creator.sh local.gitlab
 # nginx/self-sign-creator.sh local.webtop
 
