@@ -1,5 +1,13 @@
 version: "3.7"
 services:
+  grafana-loki:
+    container_name: grafana-loki
+    image: grafana/loki:main-ac422b3
+    restart: unless-stopped
+    volumes:
+      - loki_data:/loki
+    expose:
+      - "3100"
   fluentd-loki:
     container_name: fluentd-loki
     image: grafana/fluent-plugin-loki:main-ac422b3-amd64
@@ -17,6 +25,8 @@ services:
       - fluentd_log:/var/log
     ports:
       - 24224:24224
+    depends_on:
+      - grafana-loki
   prometheus:
     container_name: prometheus
     restart: unless-stopped
@@ -259,14 +269,6 @@ services:
       - grafana_data:/var/lib/grafana
     expose:
       - "3000"
-  grafana-loki:
-    container_name: grafana-loki
-    image: grafana/loki:main-ac422b3
-    restart: unless-stopped
-    volumes:
-      - loki_data:/loki
-    expose:
-      - "3100"
   # miniclass:
   #   container_name: miniclass
   #   image: miniclass:0.1
