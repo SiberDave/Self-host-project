@@ -41,6 +41,7 @@ Run the command inside of file postgreqsql/Initialize.sql to install database th
 - Prometheus
 - Nginx-Prometheus-Exporter
 - Node Exporter
+- Logging Stack (FluentD, Loki, Grafana)
 
 ## Application Architecture
 ![App Screenshot](https://drive.usercontent.google.com/download?id=1jNgom64DRagEPo2R0ya47r8huhjB72YB)

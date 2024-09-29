@@ -1,5 +1,31 @@
 version: "3.7"
 services:
+  fluentd-loki:
+    container_name: fluentd-loki
+    image: grafana/fluent-plugin-loki:main-ac422b3-amd64
+    restart: unless-stopped
+    command:
+      - "fluentd"
+      - "-v"
+      - "-p"
+      - "/fluentd/plugins"
+    environment:
+      - FLUENTD_CONF=fluentd.conf
+      - LOKI_URL=http://grafana-loki:3100
+    volumes:
+      - ${PWD}/data/fluentd/fluentd.conf:/fluentd/etc/fluentd.conf
+      - fluentd_log:/var/log
+    ports:
+      - 24224:24224
+  prometheus:
+    container_name: prometheus
+    restart: unless-stopped
+    expose:
+      - "9090"
+    volumes:
+      - ${PWD}/data/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    image: prom/prometheus:v2.54.1
   code-server:
     container_name: code-server
     volumes:
@@ -11,6 +37,11 @@ services:
     expose:
       - "8443"
     image: lscr.io/linuxserver/code-server:4.92.2
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: "172.17.0.1:24224"
+        tag: "code-server"
   vaultwarden: 
     container_name: vaultwarden
     env_file:
@@ -21,6 +52,11 @@ services:
     expose:
       - "80"
     image: vaultwarden/server:1.32.0-alpine
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: "172.17.0.1:24224"
+        tag: "vaultwarden"
   portainer-ce:
     expose:
       - "9443"
@@ -33,6 +69,11 @@ services:
       - ${PWD}/data/nginx/certs/local.portainer-crt.pem:/certs/local.portainer-crt.pem
       - ${PWD}/data/nginx/certs/local.portainer-key.pem:/certs/local.portainer-key.pem
     image: portainer/portainer-ce:2.21.1-alpine
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: "172.17.0.1:24224"
+        tag: "portainer-ce"
   postgres:
     container_name: postgre-db
     restart: unless-stopped
@@ -45,6 +86,11 @@ services:
     env_file:
       - ${PWD}/.env-vaultwarden
     image: postgres:16.4
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: "172.17.0.1:24224"
+        tag: "postgres"
   maria:
     container_name: maria-db
     restart: unless-stopped
@@ -57,6 +103,11 @@ services:
     expose:
       - "3306"
     image: mariadb:11.6.1-rc
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: "172.17.0.1:24224"
+        tag: "mariadb"
   nextcloud:
     container_name: nextcloud
     restart: unless-stopped
@@ -71,6 +122,11 @@ services:
     depends_on:
       - postgres
     image: nextcloud:28.0.9-fpm
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: "172.17.0.1:24224"
+        tag: "nextcloud"
   # webtop:
   #   container_name: webtop
   #   restart: unless-stopped
@@ -128,15 +184,6 @@ services:
     restart: unless-stopped
     volumes:
       - '/:/host:ro,rslave'
-  prometheus:
-    container_name: prometheus
-    restart: unless-stopped
-    expose:
-      - "9090"
-    volumes:
-      - ${PWD}/data/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus_data:/prometheus
-    image: prom/prometheus:v2.54.1
   nginx-app:
     container_name: nginx
     restart: unless-stopped
@@ -159,6 +206,11 @@ services:
       # - miniclass
       # - webtop
     image: nginx:1.27.1
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: "172.17.0.1:24224"
+        tag: "nginx"
   gitea:
     container_name: gitea
     image: gitea/gitea:1.22.2-rootless
@@ -176,6 +228,11 @@ services:
       - "2222:2222"
     depends_on:
       - postgres
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: "172.17.0.1:24224"
+        tag: "gitea"
   dnsmasq:
     container_name: dnsmasq
     restart: unless-stopped
@@ -188,9 +245,28 @@ services:
     env_file:
       - ${PWD}/.env-dnsmasq
     logging:
+      # driver: fluentd
       options:
+        # fluentd-address: "tcp://fluentd:24224"
+        # tag: "dnsmasq"
         max-size: 100m
     image: jpillora/dnsmasq:latest
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:11.2.1
+    restart: unless-stopped
+    volumes:
+      - grafana_data:/var/lib/grafana
+    expose:
+      - "3000"
+  grafana-loki:
+    container_name: grafana-loki
+    image: grafana/loki:main-ac422b3
+    restart: unless-stopped
+    volumes:
+      - loki_data:/loki
+    expose:
+      - "3100"
   # miniclass:
   #   container_name: miniclass
   #   image: miniclass:0.1
@@ -209,6 +285,9 @@ volumes:
   maria_data:
   gitea_data:
   gitea_config:
+  fluentd_log:
+  grafana_data:
+  loki_data:
   # gitlab_config:
   # gitlab_logs:
   # gitlab_data:
