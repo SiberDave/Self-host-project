@@ -39,3 +39,7 @@ scrape_configs:
     static_configs:
       - targets:
           - "172.17.0.1:9100"
+  - job_name: "homelab - hardware"
+    static_configs:
+      - targets:
+          - "<IP baremetal>:9100"

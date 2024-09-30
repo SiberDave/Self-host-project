@@ -187,6 +187,9 @@ services:
     image: prom/node-exporter:v1.8.2
     command:
       - '--path.rootfs=/host'
+      - '--collector.hwmon'
+      - '--collector.processes'
+      - '--collector.systemd'
     network_mode: host
     expose:
       - "9100"
