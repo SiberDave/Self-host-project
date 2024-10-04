@@ -31,6 +31,7 @@ nginx/self-sign-creator.sh local.prometheus
 nginx/self-sign-creator.sh local.gitea
 nginx/self-sign-creator.sh local.dnsmasq
 nginx/self-sign-creator.sh local.grafana
+nginx/self-sign-creator.sh local.trillium
 # nginx/self-sign-creator.sh local.miniclass
 # nginx/self-sign-creator.sh local.gitlab
 # nginx/self-sign-creator.sh local.webtop

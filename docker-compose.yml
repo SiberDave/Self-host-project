@@ -39,7 +39,7 @@ services:
   code-server:
     container_name: code-server
     volumes:
-      - ${PWD}/data/codeserver/workspace:/home/workspace
+      - /home/user01:/home/workspace
       - ${PWD}/data/codeserver/config:/config
     env_file:
       - ${PWD}/.env-codeserver
@@ -282,6 +282,19 @@ services:
   #     - "9000"
     # volumes: 
     #   - ${PWD}/../Mini-OnlineClass-Rebirth/tugasprak6:/var/www/html
+  trillium:
+    container_name: trillium
+    image: zadam/trilium:0.63.7
+    restart: unless-stopped
+    volumes:
+      - trillium_data:/home/node/trilium-data
+    expose:
+      - "8080"
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: "172.17.0.1:24224"
+        tag: "trillium"
 volumes:
   postgre_data:
   nextcloud_data:
@@ -293,6 +306,7 @@ volumes:
   fluentd_log:
   grafana_data:
   loki_data:
+  trillium_data:
   # gitlab_config:
   # gitlab_logs:
   # gitlab_data:

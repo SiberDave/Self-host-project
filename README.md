@@ -35,6 +35,7 @@ Run the command inside of file postgreqsql/Initialize.sql to install database th
 - Gitlab (Unused)
 - Gitea
 - Dnsmasq (Tailscale dns for local domain on phone)
+- Trillium Notes (For self note and note that cant be publicly shared or stored)
 
 ## Monitoring Stack
 
