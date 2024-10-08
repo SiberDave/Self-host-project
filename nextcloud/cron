@@ -1,0 +1,2 @@
+0 */1 * * * docker exec -t --user="www-data" nextcloud php -f /var/www/html/cron.php
+# Add on the crontab of server.

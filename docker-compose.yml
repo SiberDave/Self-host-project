@@ -118,6 +118,21 @@ services:
       options:
         fluentd-address: "172.17.0.1:24224"
         tag: "mariadb"
+  nextcloud-redis:
+    container_name: nextcloud-redis
+    restart: unless-stopped
+    image: redis:7.4.1-alpine3.20
+    command: 'redis-server /usr/local/etc/redis/redis.conf'
+    volumes:
+      - nextcloud_redis_data:/data
+      - nextcloud_redis_conf:/usr/local/etc/redis
+    expose:
+      - "6379"
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: "172.17.0.1:24224"
+        tag: "nextcloud-redis"
   nextcloud:
     container_name: nextcloud
     restart: unless-stopped
@@ -211,13 +226,6 @@ services:
       - 443:443
     expose:
       - "8080"
-    depends_on:
-      - code-server
-      - vaultwarden
-      - nextcloud
-      - portainer-ce
-      # - miniclass
-      # - webtop
     image: nginx:1.27.1
     logging:
       driver: fluentd
@@ -307,6 +315,8 @@ volumes:
   grafana_data:
   loki_data:
   trillium_data:
+  nextcloud_redis_data:
+  nextcloud_redis_conf:
   # gitlab_config:
   # gitlab_logs:
   # gitlab_data:

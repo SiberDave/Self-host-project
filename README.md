@@ -21,6 +21,12 @@ Run docker-composer.yml to run all of application
 ```
 
 Run the command inside of file postgreqsql/Initialize.sql to install database that needed by application.
+
+### Nextcloud
+
+Copy the cronjob on `nextcloud/cron` to server crontab.
+
+Copy the redis.conf on `nextcloud/Redis/redis.conf` into docker volume nextcloud_redis_conf
     
 ## Application List
 
